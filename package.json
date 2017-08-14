@@ -1,0 +1,24 @@
+{
+  "name": "bloc-jams-angular",
+  "version": "1.0.0",
+  "description": "A starter application for student projects in Bloc's [Frontend Web Development Course](https://www.bloc.io/frontend-development-bootcamp).",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephersue/bloc-jams-angular.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephersue/bloc-jams-angular/issues"
+  },
+  "homepage": "https://github.com/stephersue/bloc-jams-angular#readme",
+  "dependencies": {
+    "hapi": "^16.5.2",
+    "inert": "^4.2.1"
+  }
+}
