@@ -4,32 +4,6 @@
 
           var currentAlbum = Fixtures.getAlbum();
 
-          /**
-          *   @function getSongIndex
-          *   @desc gets the song index so we can then manipulate it for next and previous buttons
-          *   @param {Object} song
-          */
-          var getSongIndex = function(song) {
-               return currentAlbum.songs.indexOf(song);
-           };
-
-          /**
-          * @desc Current Buzz object audio file
-          * @type {Object}
-          */
-          SongPlayer.currentSong = null;
-
-          /**
-          * @desc Current playback time (in seconds) of currently playing song
-          * @type {Number}
-          */
-          SongPlayer.currentTime = null;
-
-          /**
-          * @desc Current playback volume of currently playing song
-          * @type {Number}
-          */
-          SongPlayer.volume = 60;
 
           /**
            * @desc Buzz object audio file
@@ -58,18 +32,51 @@
                 });
               });
 
-              currentSong = song;
+              currentBuzzObject.bind('ended', function() {
+                $rootScope.$apply(function() {
+                    SongPlayer.next();
+                });
+              });
+
+              SongPlayer.currentSong = song;
            };
 
            /**
-            * @function
-            * @desc Stops currently playing song
+            * @function stopSong
+            * @desc Stops currently playing song and sets song playing to null
             * @param {Object} song
             */
            var stopSong = function() {
               currentBuzzObject.stop();
               SongPlayer.currentSong.playing = null;
            }
+
+           /**
+           *   @function getSongIndex
+           *   @desc gets the song index so we can then manipulate it for next and previous buttons
+           *   @param {Object} song
+           */
+           var getSongIndex = function(song) {
+                return currentAlbum.songs.indexOf(song);
+            };
+
+           /**
+           * @desc Current Buzz object audio file
+           * @type {Object}
+           */
+           SongPlayer.currentSong = null;
+
+           /**
+           * @desc Current playback time (in seconds) of currently playing song
+           * @type {Number}
+           */
+           SongPlayer.currentTime = null;
+
+           /**
+           * @desc Current playback volume of currently playing song
+           * @type {Number}
+           */
+           SongPlayer.volume = 60;
 
            /**
            * @function playSong
@@ -91,10 +98,10 @@
 
           SongPlayer.play = function(song) {
               song = song || SongPlayer.currentSong;
-              if (currentSong !== song) {
+              if (SongPlayer.currentSong !== song) {
                   setSong(song);
                   playSong(song);
-              } else if (currentSong === song) {
+              } else if (SongPlayer.currentSong === song) {
                 if (currentBuzzObject.isPaused()) {
                   playSong(song);
                 }

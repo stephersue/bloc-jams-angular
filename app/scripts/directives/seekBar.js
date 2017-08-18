@@ -16,7 +16,7 @@
          replace: true,
          restrict: 'E',
          scope: {
-         onChange: '&'
+           onChange: '&'
          },
          link: function(scope, element, attributes) {
            scope.value = 0;
