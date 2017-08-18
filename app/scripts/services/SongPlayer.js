@@ -26,6 +26,12 @@
           SongPlayer.currentTime = null;
 
           /**
+          * @desc Current playback volume of currently playing song
+          * @type {Number}
+          */
+          SongPlayer.volume = 60;
+
+          /**
            * @desc Buzz object audio file
            * @type {Object}
            */
@@ -151,6 +157,18 @@
               currentBuzzObject.setTime(time);
             }
           };
+
+
+          /**
+          * @function setVolume
+          * @desc Set current volume of currently playing song
+          */
+          SongPlayer.setVolume = function (volume) {
+ 			        if (currentBuzzObject) {
+ 				           currentBuzzObject.setVolume(volume);
+ 			        }
+ 			        SongPlayer.volume = volume;
+ 		      };
 
           return SongPlayer;
      }
