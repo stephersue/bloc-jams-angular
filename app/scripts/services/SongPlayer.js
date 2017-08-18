@@ -29,12 +29,9 @@
               currentBuzzObject.bind('timeupdate', function() {
                 $rootScope.$apply(function() {
                   SongPlayer.currentTime = currentBuzzObject.getTime();
-                });
-              });
-
-              currentBuzzObject.bind('ended', function() {
-                $rootScope.$apply(function() {
-                    SongPlayer.next();
+                  if (currentBuzzObject.isEnded()) {
+                        SongPlayer.next();
+                  }
                 });
               });
 
@@ -49,6 +46,16 @@
            var stopSong = function() {
               currentBuzzObject.stop();
               SongPlayer.currentSong.playing = null;
+           }
+
+           /**
+           *@function pauseSong
+           *@desc pauses song and sets song.playing to false so album.html changes play/pause icon
+           *@param {Object} song
+           */
+           var pauseSong = function(song) {
+             currentBuzzObject.pause();
+             song.playing = false;
            }
 
            /**
@@ -116,8 +123,7 @@
           */
           SongPlayer.pause = function(song) {
             song = song || SongPlayer.currentSong;
-            currentBuzzObject.pause();
-            song.playing = false;
+            pauseSong(song);
           };
 
           /**
@@ -174,7 +180,6 @@
  			        if (currentBuzzObject) {
  				           currentBuzzObject.setVolume(volume);
  			        }
- 			        SongPlayer.volume = volume;
  		      };
 
           return SongPlayer;

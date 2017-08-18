@@ -4,9 +4,9 @@
          .html5Mode({
              enabled: true,
              requireBase: false
-         });
+         })
 
-         $stateProvider
+       $stateProvider
          .state('landing', {
              url: '/',
              controller: 'LandingCtrl as landing',
